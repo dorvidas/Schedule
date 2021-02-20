@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\MessageController;
 
 Route::get('/', function()
 {
@@ -13,6 +13,9 @@ Route::get('/', function()
 })->name('home');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/messages', [MessageController::class, 'index'])->name('messages');
+Route::post('/messages', [MessageController::class, 'sendMessages'])->name('messages');
 
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
