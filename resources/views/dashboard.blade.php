@@ -5,14 +5,15 @@
         <table class="table-fixed rounded-lg w-full border-separate">
           <thead class="bg-purple-900 text-white w-full">
             <tr>
+            <!-- Must be done properly -->
               <th class="w-1/12 py-4 rounded-tl-lg" >Time</th>
-              <th class="w-1/6">Monday</th>
-              <th class="w-1/6">Tuesday</th>
-              <th class="w-1/6">Wednesday</th>
-              <th class="w-1/6">Thursday</th>
-              <th class="w-1/6">Friday</th>
-              <th class="w-1/6">Saturday</th>
-              <th class="w-1/6 rounded-tr-lg">Sunday</th>
+                @foreach ($currentWeek as $day)
+                  @if (strpos($day, 'Sunday') !== false)
+                    <th class="w-1/6 rounded-tr-lg"> {{ $day }} </th>
+                  @else
+                    <th class="w-1/6"> {{ $day }} </th>
+                  @endif
+                @endforeach
             </tr>
           </thead>
           <tbody class="text-center bg-purple-50">
