@@ -31,7 +31,7 @@ class MessageController extends Controller
         $message = $response->current();
         
         if ($message->getStatus() == 0) {
-            return view('messages');
+            return back();
         } else {
             echo "The message failed with status: " . $message->getStatus() . "\n";
         }

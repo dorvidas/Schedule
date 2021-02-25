@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonPeriod;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -24,5 +26,15 @@ class DashboardController extends Controller
         return view('dashboard', [
             'currentWeek' => $weekDays
         ]);
+    }
+    public function store(Request $request)
+    {
+        $request->user()->times()->create([
+            'user_id' => User::find($request->user_id),
+            'workDay' => $request->workDay,
+            'StartingAt' => $request->StartingAt,
+            'FinishingAt' => $request->FinishingAt 
+        ]);
+        return back();
     }
 }

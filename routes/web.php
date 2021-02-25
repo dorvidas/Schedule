@@ -13,6 +13,7 @@ Route::get('/', function()
 })->name('home');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::post('/dashboard', [DashboardController::class, 'store']);
 
 Route::get('/messages', [MessageController::class, 'index'])->name('messages');
 Route::post('/messages', [MessageController::class, 'sendMessages'])->name('messages');
