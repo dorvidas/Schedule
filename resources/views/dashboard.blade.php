@@ -9,12 +9,12 @@
     overflow-y: visible !important;
   }
 </style>
+
 <div class="flex justify-center">
     <div class="w-8/12 bg-white p-6 rounded-lg">
         <table class="table-fixed rounded-lg w-full border-separate">
           <thead class="bg-purple-900 text-white w-full">
             <tr>
-            <!-- Must be done properly -->
               <th class="w-1/12 py-4 rounded-tl-lg" >Time</th>
                 @foreach ($currentWeek as $day)
                   @if (strpos($day, 'Sunday') !== false)
@@ -28,63 +28,63 @@
           <tbody class="text-center bg-purple-50">
             <tr>
               <td class="py-4">06:00</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
             </tr>
             <tr>
               <td class="py-4">08:00</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
             </tr>
             <tr>
               <td class="py-4">10:00</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
             </tr>
             <tr>
               <td class="py-4">12:00</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
             </tr>
             <tr>
               <td class="py-4">14:00</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
             </tr>
             <tr>
               <td class="py-4">16:00</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
+              <td class="modal-open hover:bg-purple-200"></td>
             </tr>
             <tr>
               <td class="py-4 rounded-bl-lg">18:00</td>
@@ -110,15 +110,19 @@
         </div>
         
       <div>
-        <label for="cars">Select employee:</label>
+        <label for="users">Select employee:</label>
         <p>
           <select name="user_id" id="user_id">
-            <option value="2">2</option>
+            @foreach ($users as $user)
+              <option value="{{ $user->id }}">{{ $user->name }}</option>
+            @endforeach
           </select>
         </p>
         <p>
           <select name="workDay" id="workDay">
-            <option value="2021-02-10">2021-02-10</option>
+            @foreach ($currentWeek as $day)
+              <option value="{{ $day }}">{{ $day }}</option>
+            @endforeach
           </select>
         </p>
         <p>
@@ -150,45 +154,8 @@
     </form>
     </div>
   </div>
-    <script>
-      var openmodal = document.querySelectorAll('.modal-open')
-      for (var i = 0; i < openmodal.length; i++) {
-        openmodal[i].addEventListener('click', function(event){
-        event.preventDefault()
-        toggleModal()
-        })
-      }
-      
-      const overlay = document.querySelector('.modal-overlay')
-      overlay.addEventListener('click', toggleModal)
-      
-      var closemodal = document.querySelectorAll('.modal-close')
-      for (var i = 0; i < closemodal.length; i++) {
-        closemodal[i].addEventListener('click', toggleModal)
-      }
-      
-      document.onkeydown = function(evt) {
-        evt = evt || window.event
-        var isEscape = false
-        if ("key" in evt) {
-        isEscape = (evt.key === "Escape" || evt.key === "Esc")
-        } else {
-        isEscape = (evt.keyCode === 27)
-        }
-        if (isEscape && document.body.classList.contains('modal-active')) {
-        toggleModal()
-        }
-      };
-      
-      function toggleModal () {
-        const body = document.querySelector('body')
-        const modal = document.querySelector('.modal')
-        modal.classList.toggle('opacity-0')
-        modal.classList.toggle('pointer-events-none')
-        body.classList.toggle('modal-active')
-      }
-      
-    </script>
   </div>
 </div>
+<script src=" {{ asset('js/schedulePopUp.js') }}" type="text/javascript"></script>
 @endsection
+

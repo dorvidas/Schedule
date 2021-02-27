@@ -23,8 +23,11 @@ class DashboardController extends Controller
         foreach ($period as $currentDay) {
             $weekDays[] = $currentDay->format('l m-d');
         }
+
+        $users = User::get();
         return view('dashboard', [
-            'currentWeek' => $weekDays
+            'currentWeek' => $weekDays,
+            'users' => $users,
         ]);
     }
     public function store(Request $request)
