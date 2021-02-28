@@ -25,77 +25,23 @@
                 @endforeach
             </tr>
           </thead>
+          
           <tbody class="text-center bg-purple-50">
-            <tr>
-              <td class="py-4">06:00</td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-            </tr>
-            <tr>
-              <td class="py-4">08:00</td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-            </tr>
-            <tr>
-              <td class="py-4">10:00</td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-            </tr>
-            <tr>
-              <td class="py-4">12:00</td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-            </tr>
-            <tr>
-              <td class="py-4">14:00</td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-            </tr>
-            <tr>
-              <td class="py-4">16:00</td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-            </tr>
-            <tr>
-              <td class="py-4 rounded-bl-lg">18:00</td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="modal-open hover:bg-purple-200"></td>
-              <td class="rounded-br-lg modal-open hover:bg-purple-200"></td>
-            </tr>
+            @for ($time = strtotime("06:00"); $time < strtotime("22:00"); $time+=7200)
+              <tr>
+                <td class="py-4">{{ date("H:i",$time) }}</td>
+                  @for ($i = 0; $i < 7; $i++)
+                  <td class="modal-open hover:bg-purple-200">
+                    @foreach ($schedule as $day)                  
+                      @if (date("H:i:s",$time) == $day->StartingAt && $day->workDay == $inputDays[$i])
+                        {{ $day->user->name }}
+                      @endif
+                    @endforeach
+                  </td>
+                  @endfor
+                </td>
+              </tr>
+            @endfor
           </tbody>
         </table>
   <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
@@ -119,8 +65,8 @@
           </select>
         </p>
         <p>
-          <select name="workDay" id="workDay">
-            @foreach ($currentWeek as $day)
+          <select name="inputDays" id="inputDays">
+            @foreach ($inputDays as $day)
               <option value="{{ $day }}">{{ $day }}</option>
             @endforeach
           </select>
@@ -132,7 +78,8 @@
             <option value="10:00">10:00</option>
             <option value="12:00">12:00</option>
             <option value="14:00">14:00</option>
-            <option value="16:00">12:00</option>
+            <option value="16:00">16:00</option>
+            <option value="18:00">18:00</option>
           </select>
         </p>
         <p>
@@ -143,6 +90,7 @@
             <option value="14:00">14:00</option>
             <option value="16:00">16:00</option>
             <option value="18:00">18:00</option>
+            <option value="20:00">20:00</option>
           </select>
         </p>
       </div>
