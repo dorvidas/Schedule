@@ -33,7 +33,7 @@
                   @for ($i = 0; $i < 7; $i++)
                   <td class="modal-open hover:bg-purple-200">
                     @foreach ($schedule as $day)                  
-                      @if (date("H:i:s",$time) == $day->StartingAt && $day->workDay == $inputDays[$i])
+                      @if (date("H:i:s",$time) == $day->starting_at && $day->work_day == $inputDays[$i])
                         {{ $day->user->name }}
                       @endif
                     @endforeach
@@ -72,7 +72,7 @@
           </select>
         </p>
         <p>
-          <select name="StartingAt" id="StartingAt">
+          <select name="starting_at" id="starting_at">
             <option value="06:00">06:00</option>
             <option value="08:00">08:00</option>
             <option value="10:00">10:00</option>
@@ -83,7 +83,7 @@
           </select>
         </p>
         <p>
-          <select name="FinishingAt" id="FinishingAt">
+          <select name="finishing_at" id="finishing_at">
             <option value="08:00">08:00</option>
             <option value="10:00">10:00</option>
             <option value="12:00">12:00</option>

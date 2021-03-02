@@ -42,9 +42,9 @@ class DashboardController extends Controller
        
         $request->user()->schedules()->create([
             'user_id' => $request->user_id,
-            'workDay' => $request->inputDays,
-            'StartingAt' => $request->StartingAt,
-            'FinishingAt' => $request->FinishingAt 
+            'work_day' => $request->inputDays,
+            'starting_at' => $request->starting_at,
+            'finishing_at' => $request->finishing_at 
         ]);
         
         return back();
