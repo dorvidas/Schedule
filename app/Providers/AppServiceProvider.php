@@ -30,6 +30,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        return [\Vonage\Client::class];
+        //
     }
 }
