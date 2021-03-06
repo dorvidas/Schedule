@@ -2,34 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Nexmo\Laravel\Facade\Nexmo;
+use Vonage\Client;
+use Vonage\SMS\Message\SMS;
 
 class MessageController extends Controller
 {
-    public function __construct()
+    /**
+     * @var Client
+     */
+    private $client;
+
+    public function __construct(Client $client)
     {
         $this->middleware(['auth']);
+
+        $this->client = $client;
     }
     public function index()
     {
         return view('messages');
     }
 
-    public function sendMessages(Request $request)
+    public function sendMessages()
     {
-        require_once join(DIRECTORY_SEPARATOR, array('..', 'vendor', 'laravel', "framework", "src", "Illuminate", "Support", "Facades", 'Config.php'));
-        require_once join(DIRECTORY_SEPARATOR, array('..', 'vendor', 'autoload.php'));
-        $number = env('VONAGE_API_PHONE');
-        $basic  = new \Vonage\Client\Credentials\Basic(env('VONAGE_API_KEY'), env('VONAGE_API_SECRET'));
-        $client = new \Vonage\Client($basic);
-
-        $response = $client->sms()->send(
-            new \Vonage\SMS\Message\SMS($number, 'Company', 'A text message sent using the Nexmo SMS API')
+        $number = '+37060552136';
+        $response = $this->client->sms()->send(
+            new SMS($number, 'Company', 'A text message sent using the Nexmo SMS API')
         );
-        
+
         $message = $response->current();
-        
+
         if ($message->getStatus() == 0) {
             return back();
         } else {
