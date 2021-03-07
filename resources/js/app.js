@@ -1,10 +1,13 @@
 require('./bootstrap');
 
-import Vue from 'vue'
+import 'es6-promise/auto';
+import Vue from 'vue';
+import store from './store';
 
 //Components
-Vue.component('test', () => import('./test.vue'));
+Vue.component('scheduler', () => import('./components/scheduler/scheduler'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    store
 });
