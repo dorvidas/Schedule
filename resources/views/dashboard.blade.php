@@ -9,7 +9,7 @@
     overflow-y: visible !important;
   }
 </style>
-
+<test></test>
 <div class="flex justify-center">
     <div class="w-8/12 bg-white p-6 rounded-lg">
         <table class="table-fixed rounded-lg w-full border-separate">
@@ -25,14 +25,14 @@
                 @endforeach
             </tr>
           </thead>
-          
+
           <tbody class="text-center bg-purple-50">
             @for ($time = strtotime("06:00"); $time < strtotime("22:00"); $time+=7200)
               <tr>
                 <td class="py-4">{{ date("H:i",$time) }}</td>
                   @for ($i = 0; $i < 7; $i++)
                   <td class="modal-open hover:bg-purple-200">
-                    @foreach ($schedule as $day)                  
+                    @foreach ($schedule as $day)
                       @if (date("H:i:s",$time) == $day->starting_at && $day->work_day == $inputDays[$i])
                         {{ $day->user->name }}
                       @endif
@@ -54,7 +54,7 @@
         <div class="flex justify-between items-center pb-3">
           <p class="text-2xl font-bold">Add Employee</p>
         </div>
-        
+
       <div>
         <label for="users">Select employee:</label>
         <p>
