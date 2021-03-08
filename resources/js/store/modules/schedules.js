@@ -1,3 +1,5 @@
+import Schedule from "../../types/Schedule";
+
 const state = () => ({
     items: [],
 })
@@ -19,7 +21,7 @@ const actions = {
     async getSchedules ({ commit }) {
         try {
             const { data } = await axios.get('/api/schedules');
-            commit('setItems', data);
+            commit('setItems', data.map(item => new Schedule(item.date, item.timeFrom, item.timeTo, item.name)));
             }
         catch(error){
             console.log(error);
@@ -29,9 +31,15 @@ const actions = {
 
 // mutations
 const mutations = {
+    /**
+     * @param {Schedule} item Schedule.
+     */
     addItem (state, item) {
         state.items.push(item);
     },
+    /**
+     * @param {Array.<Schedule>} items List of schedules.
+     */
     setItems (state, items) {
         state.items = items;
     }
