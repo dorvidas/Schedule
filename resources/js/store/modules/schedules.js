@@ -15,12 +15,25 @@ const getters = {
 }
 
 // actions
-const actions = {}
+const actions = {
+    async getSchedules ({ commit }) {
+        try {
+            const { data } = await axios.get('/api/schedules');
+            commit('setItems', data);
+            }
+        catch(error){
+            console.log(error);
+        }
+    }
+}
 
 // mutations
 const mutations = {
     addItem (state, item) {
         state.items.push(item);
+    },
+    setItems (state, items) {
+        state.items = items;
     }
 }
 
