@@ -11,3 +11,5 @@ Do the following:
 * Adjust `Homestead.yaml`  
 * `vagrant up`
 * `php artisan migrate`
+* `npm install` - installs NPM dependencies
+* `npm run dev` - runs the build
