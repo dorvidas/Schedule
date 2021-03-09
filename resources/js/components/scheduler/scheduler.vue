@@ -20,6 +20,7 @@ export default {
             getSchedules: 'schedules/getSchedules'
         })
     },
+    computed: {},
     created(){
         this.getSchedules();
     },

@@ -5,11 +5,13 @@
                 {{employee.name}}
             </div>
         </div>
-        <div v-else>No</div>
+        <div v-else>
+            <a href="javascript:" @click="openModal">+</a>
+        </div>
     </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
 export default {
     props: {
         hour: {
@@ -26,8 +28,17 @@ export default {
             getAssigneesForDateAndHour: 'schedules/getAssigneesForDateAndHour'
         })
     },
+    methods:{
+        ...mapMutations({
+            openCreationForm: 'schedules/openCreationForm'
+        }),
+        openModal(){
+            this.openCreationForm({date: this.date, hour: this.hour});
+        }
+    },
     data() {
         return {}
     }
 };
 </script>
+
