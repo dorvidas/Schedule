@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MessageController;
+use Illuminate\Http\JsonResponse;
 
 Route::get('/', function()
 {
@@ -27,5 +28,13 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/index', function () {
-    return view('index.index');
+        $numberToConnect = new \Vonage\Voice\Endpoint\Phone('37067526613');
+    
+        $action = new \Vonage\Voice\NCCO\Action\Connect($numberToConnect);
+        $action->setFrom('37052220525');
+    
+        $ncco = new \Vonage\Voice\NCCO\NCCO();
+        $ncco->addAction($action);
+    
+        return new JsonResponse($ncco->toArray());
 });

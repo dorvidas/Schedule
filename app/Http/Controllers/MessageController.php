@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Vonage\Client;
 use Vonage\SMS\Message\SMS;
 
@@ -29,7 +30,7 @@ class MessageController extends Controller
         $response = $this->client->sms()->send(
             new SMS($number, 'Company', 'A text message sent using the Nexmo SMS API')
         );
-
+        
         $message = $response->current();
 
         if ($message->getStatus() == 0) {
@@ -37,5 +38,5 @@ class MessageController extends Controller
         } else {
             echo "The message failed with status: " . $message->getStatus() . "\n";
         }
-    }
+        }
 }

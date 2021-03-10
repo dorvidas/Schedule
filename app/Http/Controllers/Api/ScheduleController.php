@@ -22,9 +22,9 @@ class ScheduleController extends Controller
                 'name' => 'Peter'
             ],
             [
-                'date' => 1,
-                'timeFrom' => 3,
-                'timeTo' => 4,
+                'date' => 6,
+                'timeFrom' => 9,
+                'timeTo' => 16,
                 'name' => 'Sam'
             ],
         ];
