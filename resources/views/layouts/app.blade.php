@@ -27,9 +27,7 @@
                 <li>
                     <a href="" class="p-3">{{ auth()->user()->name }}</a>
                 </li>
-                <li>
-                    <a href="{{ route('register') }}" class="p-3">Register</a>
-                </li>
+                
                 <li>
                     <form action="{{ route('logout') }}" method="POST" class="p-3 inline">
                         @csrf
@@ -38,6 +36,9 @@
                 </li>
                 @endauth
                 @guest
+                <li>
+                    <a href="{{ route('register') }}" class="p-3">Register</a>
+                </li>
                 <li>
                     <a href="{{ route('login') }}" class="p-3">Login</a>
                 </li>
