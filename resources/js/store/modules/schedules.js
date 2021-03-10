@@ -2,6 +2,11 @@ import Schedule from "../../types/Schedule";
 
 const state = () => ({
     items: [],
+    createForm: {
+        show: false,
+        date: null,
+        hour: null
+    }
 })
 
 // getters
@@ -42,6 +47,14 @@ const mutations = {
      */
     setItems (state, items) {
         state.items = items;
+    },
+    openCreationForm (state, { date, hour }) {
+        state.createForm.show = true;
+        state.createForm.date = date;
+        state.createForm.hour = hour;
+    },
+    closeCreationForm (state) {
+        state.createForm.show = false;
     }
 }
 

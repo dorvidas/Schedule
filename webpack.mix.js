@@ -1,5 +1,7 @@
 const mix = require('laravel-mix');
 
+require('laravel-mix-tailwind');
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -14,6 +16,5 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .vue()
     .js('resources/js/schedulePopUp.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        require('tailwindcss')
-    ]);
+    .sass('resources/css/app.scss', 'public/css')
+    .tailwind();
