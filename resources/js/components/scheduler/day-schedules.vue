@@ -14,7 +14,7 @@ import HourSchedules from './hour-schedules';
 export default {
     props: {
         date: {
-            type: Number,
+            type: String,
             required: true
         }
     },

@@ -16,7 +16,7 @@ class ScheduleController extends Controller
             'name' => 'Jonn'
             ],
             [
-                'date' => 2,
+                'date' => '2021-03-10',
                 'timeFrom' => 2,
                 'timeTo' => 4,
                 'name' => 'Peter'

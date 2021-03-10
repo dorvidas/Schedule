@@ -1,7 +1,7 @@
 <template>
     <div class="flex">
         <day-schedules
-            v-for="date in 7"
+            v-for="date in days"
             :key="date"
             :date="date"
         ></day-schedules>
@@ -12,7 +12,24 @@ import { mapMutations, mapActions } from 'vuex'
 import DaySchedules from "./day-schedules";
 export default {
     components: { DaySchedules },
+    data: function() {
+        return {
+            days: []
+        }
+    },
+    mounted(){
+        this.loadDays();
+    },
     methods: {
+        loadDays: function(){
+            axios.get('/api/day').
+            then((response)=>{
+                this.days=response.data;
+            }).
+            catch(function(error){
+                console.log(error);
+            });
+        },
         ...mapMutations({
             addItem: 'schedules/addItem'
         }),
@@ -23,9 +40,6 @@ export default {
     computed: {},
     created(){
         this.getSchedules();
-    },
-    data() {
-        return {}
     }
 };
 </script>

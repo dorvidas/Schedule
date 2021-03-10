@@ -28,13 +28,4 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/index', function () {
-        $numberToConnect = new \Vonage\Voice\Endpoint\Phone('37067526613');
-    
-        $action = new \Vonage\Voice\NCCO\Action\Connect($numberToConnect);
-        $action->setFrom('37052220525');
-    
-        $ncco = new \Vonage\Voice\NCCO\NCCO();
-        $ncco->addAction($action);
-    
-        return new JsonResponse($ncco->toArray());
 });

@@ -19,7 +19,7 @@ export default {
             required: true
         },
         date: {
-            type: Number,
+            type: String,
             required: true
         }
     },
