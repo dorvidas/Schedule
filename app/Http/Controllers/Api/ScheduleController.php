@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use Carbon\CarbonImmutable;
+use Carbon\CarbonPeriod;
 use Illuminate\Routing\Controller;
 
 class ScheduleController extends Controller
@@ -28,5 +30,14 @@ class ScheduleController extends Controller
                 'name' => 'Sam'
             ],
         ];
+    }
+    public function generateDays(){
+        $now = CarbonImmutable::now();
+        $period = CarbonPeriod::create($now->startOfWeek()->format('Y-m-d'), 7);
+        $inputDays = [];
+        foreach ($period as $currentDay) {
+            $inputDays[] = $currentDay->format('Y-m-d');
+        }
+        return  $inputDays;
     }
 }

@@ -22,7 +22,7 @@ export default {
     },
     methods: {
         loadDays: function(){
-            axios.get('/api/day').
+            axios.get('/api/week').
             then((response)=>{
                 this.days=response.data;
             }).

@@ -6,7 +6,12 @@
             </div>
         </div>
         <div v-else>
-            <a href="javascript:" @click="openModal">+</a>
+            <div v-if="this.hour < 10">
+                <a href="javascript:" @click="openModal">{{"0" + this.hour + ":00"}}</a>
+            </div>
+            <div v-else>
+                <a href="javascript:" @click="openModal">{{this.hour + ":00"}}</a>
+            </div>
         </div>
     </div>
 </template>
@@ -33,7 +38,7 @@ export default {
             openCreationForm: 'schedules/openCreationForm'
         }),
         openModal(){
-            this.openCreationForm({date: this.date, hour: this.hour});
+            this.openCreationForm({date: this.date, hour: this.hour + ':00'});
         }
     },
     data() {

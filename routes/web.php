@@ -27,5 +27,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
+Route::post('/addSchedule', [DashboardController::class, 'addSchedule']);
+
 Route::get('/index', function () {
 });

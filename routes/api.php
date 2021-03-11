@@ -37,13 +37,4 @@ Route::get('/call', function() {
     return new JsonResponse($ncco->toArray());
 });
 
-Route::get('/day', function(){
-    $now = CarbonImmutable::now();
-    $period = CarbonPeriod::create($now->startOfWeek()->format('Y-m-d'), 7);
-    $inputDays = [];
-    foreach ($period as $currentDay) {
-        $inputDays[] = $currentDay->format('Y-m-d');
-    }
-
-        return  $inputDays;
-});
+Route::get('/week', [ApiControllers\ScheduleController::class, 'generateDays']);
