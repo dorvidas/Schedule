@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div v-if="getAssigneesForDateAndHour(date, hour).length > 0" class="flex">
+    <div class="text-center hover:bg-purple-200">
+        <div v-if="getAssigneesForDateAndHour(date, hour).length > 0">
             <div v-for="employee in getAssigneesForDateAndHour(date, hour)">
                 {{employee.name}}
             </div>

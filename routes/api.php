@@ -38,3 +38,4 @@ Route::get('/call', function() {
 });
 
 Route::get('/week', [ApiControllers\ScheduleController::class, 'generateDays']);
+Route::get('/employees', [ApiControllers\ScheduleController::class, 'returnEmployees']);

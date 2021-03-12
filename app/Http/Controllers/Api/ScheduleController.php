@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Schedule;
+use App\Models\User;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonPeriod;
 use Illuminate\Routing\Controller;
@@ -10,26 +12,22 @@ class ScheduleController extends Controller
 {
     public function index()
     {
-        return [
-            [
-            'date' => 1,
-            'timeFrom' => 1,
-            'timeTo' => 4,
-            'name' => 'Jonn'
-            ],
-            [
-                'date' => '2021-03-10',
-                'timeFrom' => 2,
-                'timeTo' => 4,
-                'name' => 'Peter'
-            ],
-            [
-                'date' => 6,
-                'timeFrom' => 9,
-                'timeTo' => 16,
-                'name' => 'Sam'
-            ],
-        ];
+        $schedules = Schedule::all();
+        $scheduleArray = [];
+        foreach ($schedules as $schedule)
+        {
+            $scheduleArray[] = [
+                'date' => $schedule->date,
+                'timeFrom' => $schedule->starting_at,
+                'timeTo' => $schedule->finishing_at,
+                'name' => $schedule->user->name
+            ];
+        }
+        return $scheduleArray;
+    }
+    public function returnEmployees(){
+        $users = User::all();
+        return $users;
     }
     public function generateDays(){
         $now = CarbonImmutable::now();
