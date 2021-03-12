@@ -25,17 +25,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/schedules', [ApiControllers\ScheduleController::class, 'index']);
 
-Route::get('/call', function() {
-    $numberToConnect = new \Vonage\Voice\Endpoint\Phone('');
-    
-    $action = new \Vonage\Voice\NCCO\Action\Connect($numberToConnect);
-    $action->setFrom('37052220525');
-
-    $ncco = new \Vonage\Voice\NCCO\NCCO();
-    $ncco->addAction($action);
-
-    return new JsonResponse($ncco->toArray());
-});
+Route::get('/call', [ApiControllers\CallController::class, 'manageCalls']);
 
 Route::get('/week', [ApiControllers\ScheduleController::class, 'generateDays']);
 Route::get('/employees', [ApiControllers\ScheduleController::class, 'returnEmployees']);
