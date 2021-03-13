@@ -15,6 +15,5 @@ require('laravel-mix-tailwind');
 
 mix.js('resources/js/app.js', 'public/js')
     .vue()
-    .js('resources/js/schedulePopUp.js', 'public/js')
     .sass('resources/css/app.scss', 'public/css')
     .tailwind();
