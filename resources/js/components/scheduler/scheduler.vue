@@ -10,27 +10,23 @@
     </div>
 </template>
 <script>
-import { mapMutations, mapActions } from 'vuex'
-import DaySchedules from "./day-schedules";
+import axios from 'axios';
+import { mapMutations, mapActions } from 'vuex';
+import DaySchedules from './day-schedules';
 export default {
     components: { DaySchedules },
-    data: function() {
+    data() {
         return {
             days: []
-        }
+        };
     },
-    mounted(){
+    mounted() {
         this.loadDays();
     },
     methods: {
-        loadDays: function(){
-            axios.get('/api/week').
-            then((response)=>{
-                this.days=response.data;
-            }).
-            catch(function(error){
-                console.log(error);
-            });
+        async loadDays() {
+            const { data } = await axios.get('/api/week');
+            this.days = data;
         },
         ...mapMutations({
             addItem: 'schedules/addItem'
@@ -39,8 +35,7 @@ export default {
             getSchedules: 'schedules/getSchedules'
         })
     },
-    computed: {},
-    created(){
+    created() {
         this.getSchedules();
     }
 };

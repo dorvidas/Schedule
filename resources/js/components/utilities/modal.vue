@@ -41,8 +41,8 @@
 export default {
     methods: {
         toggleModal() {
-            const body = document.querySelector('body')
-            body.classList.toggle('modal-active')
+            const body = document.querySelector('body');
+            body.classList.toggle('modal-active');
         },
         close() {
             this.$emit('closed');
@@ -50,7 +50,7 @@ export default {
         }
     },
     mounted() {
-        if(this.visible){
+        if (this.visible) {
             this.toggleModal();
         }
     },
@@ -78,5 +78,3 @@ export default {
         overflow-y: visible !important;
     }
 </style>
-
-
