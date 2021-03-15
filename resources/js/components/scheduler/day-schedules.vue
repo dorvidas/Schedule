@@ -1,6 +1,6 @@
 <template>
     <div class="flex-grow">
-        <div class="text-center bg-purple-300">{{ date }}</div>
+        <div class="text-center p-4 bg-indigo-900 text-white">{{ date }}</div>
         <hour-schedules
             v-for="hour in 24"
             :key="hour"

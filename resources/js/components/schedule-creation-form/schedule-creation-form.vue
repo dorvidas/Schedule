@@ -35,7 +35,6 @@
                     class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close
                 </button>
             </div>
-
         </modal>
     </div>
 </template>
@@ -69,6 +68,7 @@ export default {
             }).catch(function(error){
                 console.log(error);
             });
+                        
         },
         generateTimesLeft(){
             this.times = [];
@@ -77,7 +77,7 @@ export default {
             var count = numb.match(regex);
             for (var i = count; i <= 24; i++) {
                 this.times.push(i+":00");
-            }       
+            }     
         },
         getEmplyees: function(){
             axios.get('/api/employees').
@@ -87,6 +87,15 @@ export default {
             catch(function(error){
                 console.log(error);
             });
+        }
+    },
+    watch: {
+        'inputs.from': function() {
+            axios.get('/api/week').then(response =>
+            {
+                console.log('Labas');
+            })
+
         }
     },
     computed: {

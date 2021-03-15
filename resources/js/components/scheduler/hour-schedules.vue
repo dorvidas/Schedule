@@ -1,5 +1,5 @@
 <template>
-    <div class="text-center hover:bg-purple-200">
+    <div class="text-center bg-indigo-50 hover:bg-indigo-200 overflow-y-auto h-12">
         <div v-if="getAssigneesForDateAndHour(date, hour).length > 0">
             <div v-for="employee in getAssigneesForDateAndHour(date, hour)">
                 {{employee.name}}
