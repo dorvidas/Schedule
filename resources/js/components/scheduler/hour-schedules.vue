@@ -1,8 +1,8 @@
 <template>
     <div class="text-center bg-indigo-50 hover:bg-indigo-200 overflow-y-auto h-12">
         <div v-if="getAssigneesForDateAndHour(date, hour).length > 0">
-            <div v-for="employee in getAssigneesForDateAndHour(date, hour)">
-                {{employee.name}}
+            <div v-for="employee in getAssigneesForDateAndHour(date, hour)" :key="employee.name">
+                {{ employee.name }}
             </div>
         </div>
         <div v-else>
@@ -16,7 +16,7 @@
     </div>
 </template>
 <script>
-import {mapGetters, mapMutations} from 'vuex'
+import {mapGetters, mapMutations} from 'vuex';
 export default {
     props: {
         hour: {
@@ -33,16 +33,16 @@ export default {
             getAssigneesForDateAndHour: 'schedules/getAssigneesForDateAndHour'
         })
     },
-    methods:{
+    methods: {
         ...mapMutations({
             openCreationForm: 'schedules/openCreationForm'
         }),
-        openModal(){
+        openModal() {
             this.openCreationForm({date: this.date, hour: this.hour + ':00'});
         }
     },
     data() {
-        return {}
+        return {};
     }
 };
 </script>
