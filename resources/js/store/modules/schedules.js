@@ -61,6 +61,12 @@ const mutations = {
     },
     closeCreationForm(state) {
         state.createForm.show = false;
+    },
+    setFormDate(state, value) {
+        state.createForm.date = value;
+    },
+    setFormTimeFrom(state, value) {
+        state.createForm.hour = value;
     }
 };
 

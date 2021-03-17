@@ -6,20 +6,20 @@
             @closed="closeModal"
         >
             <div>
-                Date: <input v-model="creationForm.date">
+                Date: <input v-model="date">
             </div>
             <div>
-                Hour: <input v-model="creationForm.hour">
+                Hour: <input v-model="hour">
             </div>
             <div>
-                Hour to: <select v-model="creationForm.finishing_at" name="time" id="time" @click="generateTimesLeft()">
+                Hour to: <select v-model="finishingAt" name="time" id="time">
                 <option v-for="time in times" :value="time" :key="time">
                     {{ time }}
                 </option>
             </select>
             </div>
             <div>
-                Employee: <select v-model="creationForm.user_id" name="user_id" id="user_id">
+                Employee: <select v-model="selectedUserId" name="user_id" id="user_id">
                 <option v-for="employee in employees" :value="employee.id" :key="employee.name">
                     {{ employee.name }}
                 </option>
@@ -46,50 +46,70 @@ export default {
     data() {
         return {
             employees: [],
-            times: []
+            finishingAt: null,
+            selectedUserId: null
         };
     },
     mounted() {
-        this.getEmplyees();
+        this.getEmployees();
     },
     methods: {
         ...mapMutations({
-            closeCreationForm: 'schedules/closeCreationForm'
+            closeCreationForm: 'schedules/closeCreationForm',
+            setFormDate: 'schedules/setFormDate',
+            setFormTimeFrom: 'schedules/setFormTimeFrom'
         }),
         closeModal() {
             this.closeCreationForm();
         },
         async addSchedule() {
             await axios.post('addSchedule', {
-                'user_id': this.creationForm.user_id,
-                'date': this.creationForm.date,
-                'starting_at': this.creationForm.hour,
-                'finishing_at': this.creationForm.finishing_at
+                'user_id': this.selectedUserId,
+                'date': this.date,
+                'starting_at': this.hour,
+                'finishing_at': this.finishingAt
             });
         },
-        generateTimesLeft() {
-            this.times = [];
-            const regex = /\d+/;
-            const numb = this.creationForm.hour;
-            const count = numb.match(regex);
-            for (let i = count; i <= 24; i++) {
-                this.times.push(i + ':00');
-            }
-        },
-        async getEmplyees() {
+        async getEmployees() {
             const { data } = await axios.get('/api/employees');
             this.employees = data;
-        }
-    },
-    watch: {
-        async 'inputs.from'() {
-            await axios.get('/api/week');
         }
     },
     computed: {
         ...mapState({
             creationForm: state => state.schedules.createForm
-        })
+        }),
+        date: {
+            get() {
+                return this.creationForm.date;
+            },
+            set(value) {
+                this.setFormDate(value);
+            }
+        },
+        hour: {
+            get() {
+                return this.creationForm.hour;
+            },
+            set(value) {
+                this.setFormTimeFrom(value);
+            }
+        },
+        times() {
+            let times = [];
+
+            if (!this.hour) {
+                return times;
+            }
+
+            const regex = /\d+/;
+            const numb = this.hour;
+            const count = numb.match(regex);
+            for (let i = count; i <= 24; i++) {
+                times.push(i + ':00');
+            }
+            return times;
+        }
     }
 };
 </script>
