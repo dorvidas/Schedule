@@ -43,13 +43,7 @@ const actions = {
 // mutations
 const mutations = {
     /**
-     * @param {Schedule} item Schedule.
-     */
-    addItem(state, item) {
-        state.items.push(item);
-    },
-    /**
-     * @param {Array.<Schedule>} items List of schedules.
+     * @param {Schedule[]} items List of schedules.
      */
     setItems(state, items) {
         state.items = items;

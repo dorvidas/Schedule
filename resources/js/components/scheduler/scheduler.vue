@@ -11,7 +11,7 @@
 </template>
 <script>
 import axios from 'axios';
-import { mapMutations, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import DaySchedules from './day-schedules';
 export default {
     components: { DaySchedules },
@@ -28,9 +28,6 @@ export default {
             const { data } = await axios.get('/api/week');
             this.days = data;
         },
-        ...mapMutations({
-            addItem: 'schedules/addItem'
-        }),
         ...mapActions({
             getSchedules: 'schedules/getSchedules'
         })

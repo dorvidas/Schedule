@@ -29,7 +29,7 @@
             <div class="flex justify-end pt-2">
                 <button @click="addSchedule()"
                         class="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">
-                    Action
+                    Create
                 </button>
                 <button @click="closeModal()"
                         class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close
@@ -40,7 +40,7 @@
 </template>
 <script>
 import axios from 'axios';
-import { mapMutations, mapState } from 'vuex';
+import {mapActions, mapMutations, mapState} from 'vuex';
 
 export default {
     data() {
@@ -59,6 +59,9 @@ export default {
             setFormDate: 'schedules/setFormDate',
             setFormTimeFrom: 'schedules/setFormTimeFrom'
         }),
+        ...mapActions({
+            getSchedules: 'schedules/getSchedules'
+        }),
         closeModal() {
             this.closeCreationForm();
         },
@@ -69,6 +72,10 @@ export default {
                 'starting_at': this.hour,
                 'finishing_at': this.finishingAt
             });
+
+            await this.getSchedules();
+
+            this.closeModal();
         },
         async getEmployees() {
             const { data } = await axios.get('/api/employees');
